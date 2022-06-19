@@ -1,133 +1,109 @@
-class Hamburguesa{
-    constructor(nombre, descripcion, precio, stock, img){
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
-        this.img = img
+class Carrito {
+  claveEnStorage;
+  elementos;
+
+  constructor() {
+    this.claveEnStorage = 'CARRITO';
+
+    const carritoEnStorage = localStorage.getItem(this.claveEnStorage);
+
+    if (carritoEnStorage === null) {
+      this.elementos = [];
+      this.actualizarStorage();
+    } else {
+      this.elementos = JSON.parse(carritoEnStorage);
     }
+  }
+
+  contieneElementoConId(id) {
+    const elementoEncontrado = this.elementos.find((elemento) => elemento.id === id);
+    return elementoEncontrado !== undefined;
+  }
+
+  agregarElemento(elementoAAgregar, cantidad) {
+    if (this.contieneElementoConId(elementoAAgregar.id)) {
+      // actualizar
+      const elementoEnCarrito = this.elementos.find((elemento) => elemento.id === elementoAAgregar.id);
+      elementoEnCarrito.cantidad = cantidad;
+    } else {
+      // crear
+      this.elementos.push({
+        ...elementoAAgregar,
+        cantidad: cantidad
+      });
+    }
+
+    this.actualizarStorage();
+  }
+
+  eliminarElemento(id) {
+    this.elementos = this.elementos.filter((elemento) => elemento.id !== id);
+    this.actualizarStorage();
+  }
+
+  vaciar() {
+    this.elementos = [];
+    this.actualizarStorage();
+  }
+
+  actualizarStorage() {
+    localStorage.setItem(this.claveEnStorage, JSON.stringify(this.elementos));
+  }
 }
 
-const hamburguesa1 = new Hamburguesa("plaplap", "plapalpal", 1100, 50,)
-const hamburguesa2 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa3 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa4 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa5 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa6 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa7 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa8 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa9 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa10 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa11 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
-const hamburguesa12 = new Hamburguesa("plaplap", "plapalpal", 1100, 50)
+const divHamburguesas = document.querySelector('#div-hamburguesas');
+const botonFinalizarCompra = document.querySelector('#boton-finalizar-compra');
 
-let hamburguesas = [hamburguesa1, hamburguesa2, hamburguesa3, hamburguesa4, hamburguesa5, hamburguesa6, hamburguesa7,hamburguesa8, hamburguesa9, hamburguesa10, hamburguesa11, hamburguesa12]
+let carrito = new Carrito();
 
-let carrito = []
-
-if (localStorage.getItem('carrito')) {
-    carrito = JSON.parse(localStorage.getItem('carrito'))
-} else{
-    localStorage.setItem('carrito', JSON.stringify(carrito))
-}
-
-
-let divHamburguesas = document.querySelector('#divHamburguesas')
-
-hamburguesas.forEach( (hamburguesa, indice) => {
-    divHamburguesas.innerHTML +=`
-    <div class="card mb-3" id="hamburguesa${indice}">
-    <h3 class="card-header">${hamburguesa.nombre}</h3>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-      <rect width="100%" height="100%" fill="#868e96"></rect>
-      <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-    </svg>
-    <div class="card-body">
-      <p class="card-text">${hamburguesa.descripcion}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">$${hamburguesa.precio}</li>
-      <li class="list-group-item">${hamburguesa.stock}</li>
-      <li class="list-group-item"></li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    <div class="card-footer text-muted">
-      2 days ago
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <button id="boton${indice}" class="btn btn-dark">Agregar al carrito</button>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-    `
+botonFinalizarCompra.addEventListener('click', () => {
+  carrito.vaciar();
+  Swal.fire({
+    icon: 'success',
+    title: 'Pedido confirmado',
+    text: 'Pasalo a buscar en 20 minutos',
+    footer: 'Heck Burgers'
+  })
 })
 
+fetch("hamburguesas.json")
+  .then(response => response.json())
+  .then(hamburguesas => {
+    hamburguesas.forEach((hamburguesa) => {
+      divHamburguesas.innerHTML += `
+        <div class="card mb-3" id="hamburguesa${hamburguesa.id}">
+          <h3 class="card-header">${hamburguesa.nombre}</h3>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+          </div>
+          <img src="${hamburguesa.img}" class="d-block user-select-none imagen-de-producto">
+          <div class="card-body">
+            <p class="card-text">${hamburguesa.descripcion}</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">$${hamburguesa.precio}</li>
+              <li class="list-group-item">${hamburguesa.stock}</li>
+            </ul>
+            <input type="number" value="1" min="1" id="cantidad-${hamburguesa.id}">
+            <button id="boton${hamburguesa.id}" class="btn btn-dark"">Agregar al carrito</button>
+            <button id="boton-eliminar-${hamburguesa.id}" class="btn btn-dark"">Eliminar del carrito</button>
+          </div>
+        </div>
+      `;
+    });
+    hamburguesas.forEach((hamburguesa) => {
+      const botonAgregarAlCarrito = document.querySelector(`#boton${hamburguesa.id}`);
+      const botonEliminarDelCarrito = document.querySelector(`#boton-eliminar-${hamburguesa.id}`);
+      const inputCantidadAAgregar = document.querySelector(`#cantidad-${hamburguesa.id}`);
 
+      botonAgregarAlCarrito.addEventListener('click', () => {
+        carrito.agregarElemento(hamburguesa, Number(inputCantidadAAgregar.value))
+      });
 
-hamburguesas.forEach((hamburguesa, indice ) => {
-    document.querySelector(`#boton${indice}`).addEventListener('click', () =>{
-        console.log(document.querySelector(`#hamburguesa${indice}`))
-        let hamburguesaCarrito = hamburguesas[indice]
-        carrito.push(hamburguesaCarrito)
-        localStorage.setItem('carrito', JSON.stringify(carrito))
+      botonEliminarDelCarrito.addEventListener('click', () => {
+        carrito.eliminarElemento(hamburguesa.id);
+      })
     })
-    })
-
-
-    /*
-    fetch(hamburguesas.json')
-    .then(response => response.json())
-    .then(hamburguesas => {
-      hamburguesas.forEach( (hamburguesa, indice) => {
-    divHamburguesas.innerHTML +=`
-    <div class="card mb-3" id="hamburguesa${indice}">
-    <h3 class="card-header">${hamburguesa.nombre}</h3>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-      <rect width="100%" height="100%" fill="#868e96"></rect>
-      <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-    </svg>
-    <div class="card-body">
-      <p class="card-text">${hamburguesa.descripcion}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">$${hamburguesa.precio}</li>
-      <li class="list-group-item">${hamburguesa.stock}</li>
-      <li class="list-group-item"></li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    <div class="card-footer text-muted">
-      2 days ago
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <button id="boton${indice}" class="btn btn-dark">Agregar al carrito</button>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-    `
-})
-    })
-    */ 
+  })

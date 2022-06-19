@@ -1,86 +1,86 @@
 [
     {
+        "id": "0",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham1.jpg"
+        "img": "./Img/ham1.jpg"
     },
     {
+        "id": "1",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham2.jpg"
+        "img": "./Img/ham2.jpg"
     },
     {
+        "id": "2",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham3.jfif"
+        "img": "./Img/ham3.jfif"
     },
     {
+        "id": "3",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham4.jfif"
+        "img": "./Img/ham4.jfif"
     },
     {
+        "id": "4",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham5.jfif"
+        "img": "./Img/ham5.jfif"
     },
     {
+        "id": "5",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham6.jfif"
+        "img": "./Img/ham6.jfif"
     },
     {
+        "id": "6",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham7.jfif"
+        "img": "./Img/ham7.jfif"
     },
     {
+        "id": "7",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham8.jfif"
+        "img": "./Img/ham8.jfif"
     },
     {
+        "id": "8",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham9.jfif"
+        "img": "./Img/ham9.jfif"
     },
     {
+        "id": "9",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham10.jfif"
+        "img": "./Img/ham10.jfif"
     },
     {
+        "id": "10",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham11.jfif"
+        "img": "./Img/ham11.jfif"
     },
     {
+        "id": "11",
         "nombre": "plaplap",
         "descripcion": "plapalpal",
         "precio": 1100,
-        "stock": 50,
-        "img": "ham12.jfif"
+        "img": "./Img/ham12.jfif"
     }
 ]
