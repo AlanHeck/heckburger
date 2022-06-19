@@ -71,20 +71,16 @@ fetch("hamburguesas.json")
   .then(hamburguesas => {
     hamburguesas.forEach((hamburguesa) => {
       divHamburguesas.innerHTML += `
-        <div class="card mb-3" id="hamburguesa${hamburguesa.id}">
+        <div class="card mb-3 pt-5" id="hamburguesa${hamburguesa.id}">
           <h3 class="card-header">${hamburguesa.nombre}</h3>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-          </div>
           <img src="${hamburguesa.img}" class="d-block user-select-none imagen-de-producto">
           <div class="card-body">
-            <p class="card-text">${hamburguesa.descripcion}</p>
+            <p class="card-text">Ingredientes: ${hamburguesa.descripcion}</p>
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">$${hamburguesa.precio}</li>
-              <li class="list-group-item">${hamburguesa.stock}</li>
+              <li class="list-group-item">Precio $${hamburguesa.precio}</li>
+              <li class="list-group-item pt-3">Cantidad</li>
             </ul>
             <input type="number" value="1" min="1" id="cantidad-${hamburguesa.id}">
             <button id="boton${hamburguesa.id}" class="btn btn-dark"">Agregar al carrito</button>

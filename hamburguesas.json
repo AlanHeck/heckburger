@@ -1,85 +1,85 @@
 [
     {
         "id": "0",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
+        "nombre": "Original",
+        "descripcion": "Panceta, cheddar, lechuga, tomate y mayonesa",
         "precio": 1100,
         "img": "./Img/ham1.jpg"
     },
     {
         "id": "1",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Cheese Burger",
+        "descripcion": "Doble cheddar y mayonesa",
+        "precio": 1000,
         "img": "./Img/ham2.jpg"
     },
     {
         "id": "2",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
+        "nombre": "Doble Cheese Burger",
+        "descripcion": "Doble carne, doble cheddar",
         "precio": 1100,
         "img": "./Img/ham3.jfif"
     },
     {
         "id": "3",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Oklahoma",
+        "descripcion": "Cebolla mezclada en la coccion y cheddar",
+        "precio": 1150,
         "img": "./Img/ham4.jfif"
     },
     {
         "id": "4",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Hecks Burger",
+        "descripcion": "Triple medallon, triple cheedar y panceta",
+        "precio": 1300,
         "img": "./Img/ham5.jfif"
     },
     {
         "id": "5",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Big Onion",
+        "descripcion": "Aros de cebolla, panceta y salsa Heck",
+        "precio": 1200,
         "img": "./Img/ham6.jfif"
     },
     {
         "id": "6",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Napolitana",
+        "descripcion": "Jamon, cheddar, tomate y mayonesa",
+        "precio": 950,
         "img": "./Img/ham7.jfif"
     },
     {
         "id": "7",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Mexicana",
+        "descripcion": "Picante, aji y queso suizo",
+        "precio": 1200,
         "img": "./Img/ham8.jfif"
     },
     {
         "id": "8",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "Crispy",
+        "descripcion": "Cebolla crispy, mayonesa con ajo y cheddar ",
+        "precio": 1250,
         "img": "./Img/ham9.jfif"
     },
     {
         "id": "9",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
+        "nombre": "Huevo",
+        "descripcion": "Huevo frito, panceta, cheddar y lechuga",
         "precio": 1100,
         "img": "./Img/ham10.jfif"
     },
     {
         "id": "10",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
-        "precio": 1100,
+        "nombre": "4 Quesos",
+        "descripcion": "Cheddar, suizo, pategras y provolone",
+        "precio": 1300,
         "img": "./Img/ham11.jfif"
     },
     {
         "id": "11",
-        "nombre": "plaplap",
-        "descripcion": "plapalpal",
+        "nombre": "Queso azul",
+        "descripcion": "Queso azul, lechuga, tomate",
         "precio": 1100,
         "img": "./Img/ham12.jfif"
     }
