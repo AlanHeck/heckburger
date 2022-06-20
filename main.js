@@ -71,9 +71,9 @@ fetch("hamburguesas.json")
   .then(hamburguesas => {
     hamburguesas.forEach((hamburguesa) => {
       divHamburguesas.innerHTML += `
-        <div class="card mb-3 pt-5" id="hamburguesa${hamburguesa.id}">
+        <div class="card mb-3 pt-5 color-barra" id="hamburguesa${hamburguesa.id}">
           <h3 class="card-header">${hamburguesa.nombre}</h3>
-          <img src="${hamburguesa.img}" class="d-block user-select-none imagen-de-producto">
+          <img src="${hamburguesa.img}" class="d-block user-select-none imagen-de-producto rounded-pill">
           <div class="card-body">
             <p class="card-text">Ingredientes: ${hamburguesa.descripcion}</p>
           </div>
