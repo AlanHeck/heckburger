@@ -9,9 +9,13 @@ body {
     font-family: "League Gothic", sans-serif;
     font-size: 20px;
     letter-spacing: 2px;
-    color: brown; }
-    
+    color: brown; 
+}
 
 .color-barra{
     background-color: beige;
+}
+
+.margin{
+    margin-top: 5rem;
 }

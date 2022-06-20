@@ -46,18 +46,44 @@ class Carrito {
     this.actualizarStorage();
   }
 
+  obtenerPrecioTotal() {
+    let precioTotal = 0;
+
+    for (const elemento of this.elementos) {
+      precioTotal = precioTotal + elemento.cantidad * elemento.precio;
+    }
+
+    return precioTotal
+  }
+
+  obtenerCantidadDeElementoConId(id) {
+    if (this.contieneElementoConId(id)) {
+      const elemento = this.elementos.find((elemento) => elemento.id === id);
+      return elemento.cantidad
+    } else {
+      return 0;
+    }
+  }
+
   actualizarStorage() {
     localStorage.setItem(this.claveEnStorage, JSON.stringify(this.elementos));
   }
 }
 
 const divHamburguesas = document.querySelector('#div-hamburguesas');
+const precioTotal = document.querySelector('#precio-total');
 const botonFinalizarCompra = document.querySelector('#boton-finalizar-compra');
 
-let carrito = new Carrito();
+const actualizarPrecioTotal = () => {
+  precioTotal.innerText = carrito.obtenerPrecioTotal();
+}
+
+const carrito = new Carrito();
+actualizarPrecioTotal()
 
 botonFinalizarCompra.addEventListener('click', () => {
   carrito.vaciar();
+  actualizarPrecioTotal();
   Swal.fire({
     icon: 'success',
     title: 'Pedido confirmado',
@@ -70,6 +96,7 @@ fetch("hamburguesas.json")
   .then(response => response.json())
   .then(hamburguesas => {
     hamburguesas.forEach((hamburguesa) => {
+      const cantidadEnCarrito = carrito.obtenerCantidadDeElementoConId(hamburguesa.id)
       divHamburguesas.innerHTML += `
         <div class="card mb-3 pt-5 color-barra" id="hamburguesa${hamburguesa.id}">
           <h3 class="card-header">${hamburguesa.nombre}</h3>
@@ -82,7 +109,7 @@ fetch("hamburguesas.json")
               <li class="list-group-item">Precio $${hamburguesa.precio}</li>
               <li class="list-group-item pt-3">Cantidad</li>
             </ul>
-            <input type="number" value="1" min="1" id="cantidad-${hamburguesa.id}">
+            <input type="number" value="${cantidadEnCarrito}" min="1" id="cantidad-${hamburguesa.id}">
             <button id="boton${hamburguesa.id}" class="btn btn-dark"">Agregar al carrito</button>
             <button id="boton-eliminar-${hamburguesa.id}" class="btn btn-dark"">Eliminar del carrito</button>
           </div>
@@ -95,11 +122,43 @@ fetch("hamburguesas.json")
       const inputCantidadAAgregar = document.querySelector(`#cantidad-${hamburguesa.id}`);
 
       botonAgregarAlCarrito.addEventListener('click', () => {
-        carrito.agregarElemento(hamburguesa, Number(inputCantidadAAgregar.value))
+        carrito.agregarElemento(hamburguesa, Number(inputCantidadAAgregar.value));
+        actualizarPrecioTotal();
+        Toastify({
+          text: "Hamburguesa agregada al carrito",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+          },
+          onClick: function () { }
+        }).showToast();
       });
 
       botonEliminarDelCarrito.addEventListener('click', () => {
         carrito.eliminarElemento(hamburguesa.id);
+        actualizarPrecioTotal();
+        Toastify({
+          text: "Hamburguesa eliminada del carrito",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "linear-gradient(to right, #79090b, #a200ff)",
+          },
+          onClick: function () { }
+        }).showToast();
       })
     })
   })
+
+
